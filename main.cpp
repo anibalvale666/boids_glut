@@ -118,14 +118,15 @@ void init_scene()
 
 	random_device rd;
 	mt19937 mt(rd());
-	uniform_real_distribution<double> dist(-30.0, 30.0);
-	for(int i = 0;i<100;i++)
+	uniform_real_distribution<double> dist(-20.0, 20.0);
+	for(int i = 0;i<500;i++)
 	{
-		double rx,ry;
+		double rx,ry,rz;
 		rx = dist(mt);
 		ry = dist(mt);
-		cout<< rx << " " << ry << endl;
-		flock.push_back(new Boid(rx,ry,20,20));
+		rz = dist(mt);
+		cout<< rx << " " << ry  << " " << rz << endl;
+		flock.push_back(new Boid(rx,ry,rz,20,20));
 	}
 
 }

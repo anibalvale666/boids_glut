@@ -10,19 +10,19 @@
   dir[2] /= norma;
 }
 
-Boid::Boid(double x, double y, double width, double height)
+Boid::Boid(double x, double y,double z, double width, double height)
 {
   srand(time(NULL));
 
-  position = Vector2d<double>(x, y);
+  position = Vector2d<double>(x, y, z);
 
   random_device rd;
 	mt19937 mt(rd());
 	uniform_real_distribution<double> dist(-5.0, 5.0);
 
-  velocity = Vector2d<double>(dist(mt),dist(mt));
+  velocity = Vector2d<double>(dist(mt),dist(mt),dist(mt));
 
-  acceleration = Vector2d<double>(dist(mt)/20,dist(mt)/20);
+  acceleration = Vector2d<double>(dist(mt)/20,dist(mt)/20,dist(mt)/20);
 
   this->max_force = 0.0001;
   this->max_speed = 0.7;
@@ -90,7 +90,7 @@ void Boid::draw()
 
 
   glPushMatrix();
-  glRotated(30,velocity.x,velocity.y,0);
+  glRotated(30,velocity.x,velocity.y,velocity.z);
   glBegin(GL_TRIANGLES);
   double tam = 0.3;
   glColor3f(0.5,0,0);
@@ -128,6 +128,11 @@ void Boid::edges()
       position.y = negative_height;
     else if (position.y < negative_height)
       position.y = height;
+
+    if (position.z > height)
+      position.z = negative_height;
+    else if (position.z < negative_height)
+      position.z = height;
 
 }
 

@@ -18,7 +18,7 @@ public:
 
   double max_force,max_speed,perception,width,height;
 
-  Boid(double, double, double, double);
+  Boid(double, double, double, double, double);
   void draw();
   void update();
   void edges();
